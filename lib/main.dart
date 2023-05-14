@@ -1,4 +1,4 @@
-import 'package:alhidaya/Screen/HomeScreen/home.dart';
+import 'package:alhidaya/Screen/LoginScreen/login.dart';
 import 'package:alhidaya/Screen/SplashScreen/splash.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => Splash(),
-          '/home': (context) => HomeScreen() // هون منحط رموز للصفحات اللي بدنا نروح عليها
+          '/login': (context) =>
+              LoginScreen() // هون منحط رموز للصفحات اللي بدنا نروح عليها
         });
   }
 }

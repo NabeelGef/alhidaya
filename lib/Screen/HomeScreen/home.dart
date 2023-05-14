@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../Constant/font.dart';
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(Font.url + "background.png"))),
-        ),
-        // هون بتكمّل محتويات الواجهة
-      ],
-    );
+    return Container();
   }
 }

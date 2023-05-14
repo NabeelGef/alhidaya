@@ -5,7 +5,7 @@ import 'package:alhidaya/Constant/font.dart';
 import 'package:alhidaya/Constant/sizer.dart';
 import 'package:flutter/material.dart';
 
-import '../HomeScreen/home.dart';
+import '../LoginScreen/login.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -19,7 +19,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     // تنتهي ظهور الواجهة لمدة 5 ثواني
     Timer(Duration(seconds: 5),
-        () => Navigator.pushReplacementNamed(context, "/home"));
+        () => Navigator.pushReplacementNamed(context, "/login"));
     super.initState();
   }
 
