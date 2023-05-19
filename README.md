@@ -1,16 +1,6 @@
-# alhidaya
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+تطبيق خاص لمسجد الهداية في سوريا - ريف دمشق 
+يهتم بعرض وإضافة طلاب حلقات المساجد 
+وإمكانية تعديل معلومتهم او حذفهم دونما شبكة لاسلكية
+بلإضافة لإضافة ملاحظات من مشرف الحلقة على حفظه و سلوك الطالب 
+وإمكانية إضافة مكافأت (نقاط ) او نقصانها وذلك لتشجيع الطالب ...
+سيتم إضافة إمكانيات إضافية لاحقاً بعون الله ...
