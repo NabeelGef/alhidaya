@@ -18,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage(Font.url + "background.png"))),
+                  image: AssetImage("${Font.url}background.png"))),
         ),
         // هون بتكمّل محتويات الواجهة
       ],

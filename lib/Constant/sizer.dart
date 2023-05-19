@@ -9,5 +9,11 @@ class Sizer {
   static getHeight(BuildContext context) {
     return MediaQuery.of(context).size.height;
   }
+
+  static getTextSize(BuildContext context, double size) {
+    return size *
+        (MediaQuery.of(context).size.width / 360) *
+        MediaQuery.of(context).textScaleFactor;
+  }
 }
 //https://github.com/NabeelGef/alhidaya.git

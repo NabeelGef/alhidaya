@@ -5,8 +5,6 @@ import 'package:alhidaya/Constant/font.dart';
 import 'package:alhidaya/Constant/sizer.dart';
 import 'package:flutter/material.dart';
 
-import '../LoginScreen/login.dart';
-
 class Splash extends StatefulWidget {
   const Splash({super.key});
 
@@ -18,8 +16,8 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     // تنتهي ظهور الواجهة لمدة 5 ثواني
-    Timer(Duration(seconds: 5),
-        () => Navigator.pushReplacementNamed(context, "/login"));
+    Timer(const Duration(seconds: 5),
+        () => Navigator.pushReplacementNamed(context, "/adult"));
     super.initState();
   }
 
@@ -32,7 +30,7 @@ class _SplashState extends State<Splash> {
           decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage(Font.url + "background.png"))),
+                  image: AssetImage("${Font.url}background.png"))),
         ),
         Center(
             child: Stack(
@@ -40,7 +38,7 @@ class _SplashState extends State<Splash> {
             CircleAvatar(
               backgroundColor: Coloring.primary,
               radius: Sizer.getWidth(context) / 2,
-              child: Image.asset(Font.url + "alhidaya.png"),
+              child: Image.asset("${Font.url}alhidaya.png"),
             )
           ],
         ))
