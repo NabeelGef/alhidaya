@@ -15,5 +15,6 @@ class Sizer {
         (MediaQuery.of(context).size.width / 360) *
         MediaQuery.of(context).textScaleFactor;
   }
+  //data
 }
 //https://github.com/NabeelGef/alhidaya.git
