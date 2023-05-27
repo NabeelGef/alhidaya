@@ -87,7 +87,12 @@ class _AddStudentState extends State<AddStudent> {
                               backgroundImage:
                                   myimage != null ? FileImage(myimage!) : null,
                               child: myimage == null
-                                  ? Image.asset("${Font.url}addimage.png")
+                                  ? Image.asset(
+                                      "${Font.url}addimage.png",
+                                      fit: BoxFit.cover,
+                                      width: Sizer.getTextSize(context, 50),
+                                      height: Sizer.getTextSize(context, 50),
+                                    )
                                   : null),
                         ),
                       ),
@@ -124,7 +129,7 @@ class _AddStudentState extends State<AddStudent> {
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
-                            MakeTextFormField(className, TextInputType.name,
+                            MakeTextFormField(className, TextInputType.number,
                                 "الصّفّ الدّراسي"),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
@@ -178,15 +183,19 @@ class _AddStudentState extends State<AddStudent> {
                                   margin: EdgeInsets.only(
                                       top: Sizer.getTextSize(context, 25)),
                                   width: Sizer.getWidth(context) / 2,
-                                  height: Sizer.getHeight(context) / 8,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(50),
                                     color: Coloring.secondary,
                                   ),
                                   child: Row(
                                     textDirection: TextDirection.rtl,
                                     children: [
-                                      Image.asset("${Font.url}done.png"),
+                                      Image.asset(
+                                        "${Font.url}done.png",
+                                        fit: BoxFit.cover,
+                                        width: Sizer.getTextSize(context, 50),
+                                        height: Sizer.getTextSize(context, 50),
+                                      ),
                                       Text("حفظ \n المعلومات",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -200,6 +209,9 @@ class _AddStudentState extends State<AddStudent> {
                                   ),
                                 ),
                               ),
+                            ),
+                            SizedBox(
+                              height: 50,
                             )
                           ],
                         )),

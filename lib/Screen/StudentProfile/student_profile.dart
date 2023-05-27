@@ -108,7 +108,12 @@ class _StudentProfileState extends State<StudentProfile> {
                                     }
                                   });
                                 },
-                                child: Image.asset("${Font.url}close.png"))
+                                child: Image.asset(
+                                  "${Font.url}close.png",
+                                  fit: BoxFit.cover,
+                                  width: Sizer.getTextSize(context, 50),
+                                  height: Sizer.getTextSize(context, 50),
+                                ))
                           ],
                         ),
                         Column(
@@ -140,7 +145,12 @@ class _StudentProfileState extends State<StudentProfile> {
                                     },
                                   ), (route) => false);
                                 },
-                                child: Image.asset("${Font.url}save.png"))
+                                child: Image.asset(
+                                  "${Font.url}save.png",
+                                  fit: BoxFit.cover,
+                                  width: Sizer.getTextSize(context, 50),
+                                  height: Sizer.getTextSize(context, 50),
+                                ))
                           ],
                         ),
                         Column(
@@ -158,7 +168,12 @@ class _StudentProfileState extends State<StudentProfile> {
                                     return EditStudent(student: widget.student);
                                   }));
                                 },
-                                child: Image.asset("${Font.url}edit.png"))
+                                child: Image.asset(
+                                  "${Font.url}edit.png",
+                                  fit: BoxFit.cover,
+                                  width: Sizer.getTextSize(context, 50),
+                                  height: Sizer.getTextSize(context, 50),
+                                ))
                           ],
                         ),
                       ],
@@ -174,7 +189,12 @@ class _StudentProfileState extends State<StudentProfile> {
                             ? FileImage(File(widget.student!.profile!))
                             : null,
                         child: widget.student?.profile == null
-                            ? Image.asset("${Font.url}pupils.png")
+                            ? Image.asset(
+                                "${Font.url}pupils.png",
+                                fit: BoxFit.cover,
+                                width: Sizer.getTextSize(context, 50),
+                                height: Sizer.getTextSize(context, 50),
+                              )
                             : null,
                       ),
                     ),
@@ -191,7 +211,6 @@ class _StudentProfileState extends State<StudentProfile> {
                                       fontFamily: Font.fontfamily)),
                               Container(
                                 width: Sizer.getWidth(context) / 5,
-                                height: Sizer.getHeight(context) / 20,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     color: Coloring.secondary,
@@ -220,7 +239,6 @@ class _StudentProfileState extends State<StudentProfile> {
                                       fontFamily: Font.fontfamily)),
                               Container(
                                 width: Sizer.getWidth(context) / 2,
-                                height: Sizer.getHeight(context) / 20,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     color: Coloring.secondary,
@@ -247,7 +265,6 @@ class _StudentProfileState extends State<StudentProfile> {
                                       fontFamily: Font.fontfamily)),
                               Container(
                                 width: Sizer.getWidth(context) / 5,
-                                height: Sizer.getHeight(context) / 20,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     color: Coloring.secondary,
@@ -270,7 +287,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       height: 20,
                     ),
                     Container(
-                      height: Sizer.getHeight(context) / 5,
+                      height: Sizer.getHeight(context) / 3,
                       width: Sizer.getWidth(context) / 1.1,
                       child: Form(
                           child: TextFormField(
@@ -315,6 +332,9 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                     Image.asset(
                       "${Font.url}star.png",
+                      fit: BoxFit.cover,
+                      width: Sizer.getTextSize(context, 50),
+                      height: Sizer.getTextSize(context, 50),
                     ),
                     Text("مجموع النّقاط",
                         style: TextStyle(
@@ -337,6 +357,9 @@ class _StudentProfileState extends State<StudentProfile> {
                           },
                           child: Image.asset(
                             "${Font.url}minus.png",
+                            fit: BoxFit.cover,
+                            width: Sizer.getTextSize(context, 50),
+                            height: Sizer.getTextSize(context, 50),
                           ),
                         ),
                         Text(mypoint.toString(),
@@ -355,7 +378,12 @@ class _StudentProfileState extends State<StudentProfile> {
                                 setState(() {});
                               });
                             },
-                            child: Image.asset("${Font.url}plus.png")),
+                            child: Image.asset(
+                              "${Font.url}plus.png",
+                              fit: BoxFit.cover,
+                              width: Sizer.getTextSize(context, 50),
+                              height: Sizer.getTextSize(context, 50),
+                            )),
                       ],
                     )
                   ],

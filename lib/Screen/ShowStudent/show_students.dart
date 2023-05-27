@@ -67,8 +67,6 @@ class _ShowStudentState extends State<ShowStudent> {
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     return Container(
-                                      //width: Sizer.getWidth(context) / 5,
-                                      height: Sizer.getHeight(context) / 20,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           color: Coloring.secondary,
@@ -84,8 +82,6 @@ class _ShowStudentState extends State<ShowStudent> {
                                     );
                                   } else {
                                     return Container(
-                                      //width: Sizer.getWidth(context) / 5,
-                                      height: Sizer.getHeight(context) / 20,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           color: Coloring.secondary,
@@ -118,8 +114,6 @@ class _ShowStudentState extends State<ShowStudent> {
                                     fontWeight: FontWeight.bold,
                                     fontFamily: Font.fontfamily)),
                             Container(
-                              //width: Sizer.getWidth(context) / 2,
-                              height: Sizer.getHeight(context) / 20,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   color: Coloring.secondary,
@@ -147,8 +141,6 @@ class _ShowStudentState extends State<ShowStudent> {
                                     fontWeight: FontWeight.bold,
                                     fontFamily: Font.fontfamily)),
                             Container(
-                              //width: Sizer.getWidth(context) / 5,
-                              height: Sizer.getHeight(context) / 20,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   color: Coloring.secondary,
@@ -176,18 +168,27 @@ class _ShowStudentState extends State<ShowStudent> {
                             if (snapshot.data!.isEmpty) {
                               return Column(
                                 children: [
-                                  Center(
-                                      child:
-                                          Image.asset("${Font.url}empty.png")),
-                                  Center(
-                                      child: Text(
-                                    "... لايوجد طلاب بعد ",
-                                    style: TextStyle(
-                                        fontSize:
-                                            Sizer.getTextSize(context, 25),
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Center(
+                                        child: Image.asset(
+                                      "${Font.url}empty.png",
+                                      fit: BoxFit.cover,
+                                      width: Sizer.getTextSize(context, 250),
+                                      height: Sizer.getTextSize(context, 250),
+                                    )),
+                                  ),
+                                  Expanded(
+                                    child: Center(
+                                        child: Text(
+                                      "... لايوجد طلاب بعد ",
+                                      style: TextStyle(
+                                          fontSize:
+                                              Sizer.getTextSize(context, 25),
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    )),
+                                  ),
                                 ],
                               );
                             } else {
@@ -197,7 +198,6 @@ class _ShowStudentState extends State<ShowStudent> {
                                     return Container(
                                       margin: EdgeInsets.all(10),
                                       width: Sizer.getWidth(context) / 1.5,
-                                      height: Sizer.getHeight(context) / 6,
                                       decoration: BoxDecoration(
                                           color: Coloring.secondary,
                                           borderRadius:
@@ -263,7 +263,13 @@ class _ShowStudentState extends State<ShowStudent> {
                                                           .profile!)),
                                                 )
                                               : Image.asset(
-                                                  "${Font.url}pupils.png")
+                                                  "${Font.url}pupils.png",
+                                                  fit: BoxFit.cover,
+                                                  width: Sizer.getTextSize(
+                                                      context, 50),
+                                                  height: Sizer.getTextSize(
+                                                      context, 50),
+                                                )
                                         ],
                                       ),
                                     );

@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                         child: Container(
                           alignment: Alignment.center,
-                          height: Sizer.getHeight(context) / 3.5,
+                          height: Sizer.getHeight(context) / 2.5,
                           width: Sizer.getWidth(context) / 1.1,
                           decoration: BoxDecoration(
                             color: Coloring.primary,
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 alignment: Alignment.topCenter,
                 child: CircleAvatar(
-                  radius: Sizer.getWidth(context) / 5,
+                  radius: Sizer.getHeight(context) / 10,
                   backgroundColor: Colors.white,
                   child: Image.asset(
                     '${Font.url}alhidaya.png',
@@ -183,6 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
           counterStyle: TextStyle(
               color: Coloring.secondary,
               fontFamily: Font.fontfamily,
+              fontSize: Sizer.getTextSize(context, 15),
               fontWeight: FontWeight.bold),
           errorStyle: TextStyle(
               color: Colors.red,

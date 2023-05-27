@@ -26,7 +26,7 @@ class Code {
           ListView(
             children: [
               SizedBox(
-                height: Sizer.getHeight(context) / 3,
+                height: Sizer.getHeight(context) / 2.5,
                 child: DrawerHeader(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +50,12 @@ class Code {
                                 ? FileImage(File(data['photo']!))
                                 : null,
                             child: data['photo'] == null
-                                ? Image.asset("${Font.url}user.png")
+                                ? Image.asset(
+                                    "${Font.url}user.png",
+                                    fit: BoxFit.cover,
+                                    width: Sizer.getTextSize(context, 50),
+                                    height: Sizer.getTextSize(context, 50),
+                                  )
                                 : null),
                         Text("${data['name']}",
                             style: TextStyle(
@@ -67,52 +72,19 @@ class Code {
               ),
               Column(
                 children: [
-                  // InkWell(
-                  //   onTap: () {
-                  //     // Navigator.pushNamedAndRemoveUntil(
-                  //     //     context, "/adult", (route) => false);
-                  //   },
-                  //   child: Container(
-                  //     margin:
-                  //         EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
-                  //     height: Sizer.getHeight(context) / 15,
-                  //     color: Coloring.primary,
-                  //     child: Row(
-                  //       children: [
-                  //         Expanded(
-                  //           flex: 2,
-                  //           child: Center(
-                  //             child: Text(
-                  //               "الصفحة الرّئيسيّة",
-                  //               style: TextStyle(
-                  //                   fontSize: Sizer.getTextSize(context, 20),
-                  //                   color: Colors.black,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   fontFamily: Font.fontfamily),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //         Expanded(
-                  //           child: Icon(
-                  //             Icons.home,
-                  //             color: Colors.black,
-                  //             size: Sizer.getTextSize(context, 25),
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   InkWell(
                     onTap: () {
                       Navigator.pushNamedAndRemoveUntil(
                           context, "/adult", (route) => false);
                     },
                     child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Coloring.primary,
+                      ),
                       margin:
                           EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
                       height: Sizer.getHeight(context) / 15,
-                      color: Coloring.primary,
                       child: Row(
                         children: [
                           Expanded(
@@ -132,7 +104,7 @@ class Code {
                             child: Icon(
                               Icons.groups,
                               color: Colors.black,
-                              size: Sizer.getTextSize(context, 25),
+                              size: Sizer.getTextSize(context, 35),
                             ),
                           ),
                         ],
@@ -144,10 +116,13 @@ class Code {
                       Navigator.pushNamed(context, '/myprofile');
                     },
                     child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Coloring.primary,
+                      ),
                       margin:
                           EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
                       height: Sizer.getHeight(context) / 15,
-                      color: Coloring.primary,
                       child: Row(
                         children: [
                           Expanded(
@@ -167,7 +142,7 @@ class Code {
                             child: Icon(
                               Icons.account_circle,
                               color: Colors.black,
-                              size: Sizer.getTextSize(context, 25),
+                              size: Sizer.getTextSize(context, 35),
                             ),
                           ),
                         ],
@@ -180,7 +155,7 @@ class Code {
                 margin: EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
                 child: CircleAvatar(
                   backgroundColor: Coloring.primary,
-                  radius: Sizer.getWidth(context) / 4,
+                  radius: Sizer.getHeight(context) / 7,
                   child: Image.asset(
                     "${Font.url}alhidaya.png",
                     width: Sizer.getWidth(context) / 3,
@@ -218,6 +193,7 @@ class Code {
           height: Sizer.getHeight(context) / 4.5,
         ),
       ),
+      centerTitle: true,
       backgroundColor: Colors.transparent,
       title: Text(
         "$text",
@@ -236,7 +212,7 @@ class Code {
     return AlertDialog(
       backgroundColor: Colors.transparent,
       content: Container(
-        height: Sizer.getHeight(context) / 2.5,
+        height: Sizer.getHeight(context) / 2,
         width: Sizer.getWidth(context) / 1.4,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
@@ -244,7 +220,7 @@ class Code {
                 image: AssetImage("${Font.url}background.png"),
                 fit: BoxFit.fill)),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset("${Font.url}accept.png",
                 width: Sizer.getWidth(context) / 4,
@@ -309,50 +285,73 @@ class Code {
     ControllerProfile controller = ControllerProfile();
     return Container(
       width: Sizer.getWidth(context),
-      height: Sizer.getHeight(context) / 5,
+      height: Sizer.getHeight(context) / 4,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
           image: DecorationImage(
               image: AssetImage("${Font.url}background.png"),
               fit: BoxFit.fill)),
-      child: Column(children: [
-        ListTile(
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        InkWell(
           onTap: () async {
             controller.updateValue(await _getImageFromGallery());
             selecteImage(controller.getImage);
             Navigator.pop(context);
           },
-          tileColor: Coloring.primary,
-          trailing: Text(
-            "اختيار الصورة من المعرض ",
-            style: TextStyle(
-                color: Colors.white, fontSize: Sizer.getTextSize(context, 25)),
-          ),
-          title: Image.asset(
-            "${Font.url}gallery.png",
-            width: Sizer.getWidth(context) / 10,
-            height: Sizer.getWidth(context) / 10,
+          child: Row(
+            textDirection: TextDirection.rtl,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Text(
+                  "اختيار الصورة من المعرض ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Sizer.getTextSize(context, 25)),
+                ),
+              ),
+              Expanded(
+                child: Image.asset(
+                  "${Font.url}gallery.png",
+                  width: Sizer.getWidth(context) / 10,
+                  height: Sizer.getWidth(context) / 10,
+                ),
+              ),
+            ],
           ),
         ),
         Divider(
           color: Colors.white,
           thickness: 2,
         ),
-        ListTile(
+        InkWell(
           onTap: () async {
             controller.updateValue(await _getImageFromCamera());
             selecteImage(controller.getImage);
             Navigator.pop(context);
           },
-          trailing: Text("اختيار الصورة من الكاميرا ",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Sizer.getTextSize(context, 25))),
-          title: Image.asset(
-            "${Font.url}camera.png",
-            width: Sizer.getWidth(context) / 10,
-            height: Sizer.getWidth(context) / 10,
+          child: Row(
+            textDirection: TextDirection.rtl,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Text(
+                  "اختيار الصورة من الكاميرا ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: Sizer.getTextSize(context, 25)),
+                ),
+              ),
+              Expanded(
+                child: Image.asset(
+                  "${Font.url}camera.png",
+                  width: Sizer.getWidth(context) / 10,
+                  height: Sizer.getWidth(context) / 10,
+                ),
+              ),
+            ],
           ),
         ),
       ]),
@@ -363,7 +362,7 @@ class Code {
     return AlertDialog(
       backgroundColor: Colors.transparent,
       content: Container(
-        height: Sizer.getHeight(context) / 3.1,
+        height: Sizer.getHeight(context) / 2,
         width: Sizer.getWidth(context) / 1.4,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
@@ -371,11 +370,14 @@ class Code {
                 image: AssetImage("${Font.url}background2.png"),
                 fit: BoxFit.fill)),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("${Font.url}question.png",
-                width: Sizer.getWidth(context) / 3,
-                height: Sizer.getWidth(context) / 3),
+            Image.asset(
+              "${Font.url}question.png",
+              fit: BoxFit.cover,
+              width: Sizer.getTextSize(context, 50),
+              height: Sizer.getTextSize(context, 50),
+            ),
             Text(
               "هل تريد تأكيد الحذف ؟",
               textAlign: TextAlign.center,
@@ -398,9 +400,11 @@ class Code {
                         borderRadius: BorderRadius.circular(15)),
                     alignment: Alignment.center,
                     width: Sizer.getWidth(context) / 4,
+                    height: Sizer.getHeight(context) / 10,
                     child: Row(
                       children: [
                         Expanded(
+                          flex: 2,
                           child: Text(
                             "إلغاء",
                             style: TextStyle(
@@ -410,7 +414,13 @@ class Code {
                                 fontFamily: Font.fontfamily),
                           ),
                         ),
-                        Expanded(child: Image.asset("${Font.url}close.png"))
+                        Expanded(
+                            child: Image.asset(
+                          "${Font.url}close.png",
+                          fit: BoxFit.cover,
+                          width: Sizer.getTextSize(context, 25),
+                          height: Sizer.getTextSize(context, 25),
+                        ))
                       ],
                     ),
                   ),
@@ -426,9 +436,11 @@ class Code {
                         borderRadius: BorderRadius.circular(15)),
                     alignment: Alignment.center,
                     width: Sizer.getWidth(context) / 4,
+                    height: Sizer.getHeight(context) / 10,
                     child: Row(
                       children: [
                         Expanded(
+                          flex: 2,
                           child: Text(
                             "تأكيد",
                             style: TextStyle(
@@ -438,7 +450,13 @@ class Code {
                                 fontFamily: Font.fontfamily),
                           ),
                         ),
-                        Expanded(child: Image.asset("${Font.url}done.png"))
+                        Expanded(
+                            child: Image.asset(
+                          "${Font.url}done.png",
+                          fit: BoxFit.cover,
+                          width: Sizer.getTextSize(context, 25),
+                          height: Sizer.getTextSize(context, 25),
+                        ))
                       ],
                     ),
                   ),
@@ -461,7 +479,7 @@ class Code {
     return AlertDialog(
       backgroundColor: Colors.transparent,
       content: Container(
-        height: Sizer.getHeight(context) / 2.5,
+        height: Sizer.getHeight(context) / 2,
         width: Sizer.getWidth(context) / 1.4,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
@@ -475,7 +493,6 @@ class Code {
               children: [
                 Container(
                   width: Sizer.getWidth(context) / 1.5,
-                  height: Sizer.getHeight(context) / 10,
                   child: TextFormField(
                     maxLength: 20,
                     textDirection: TextDirection.rtl,
@@ -493,12 +510,15 @@ class Code {
                       return null;
                     },
                     decoration: InputDecoration(
-                        suffixIcon: Icon(Icons.person_2),
+                        suffixIcon: Icon(
+                          Icons.person_2,
+                          size: Sizer.getTextSize(context, 20),
+                        ),
                         counterStyle: TextStyle(
                             color: Colors.red,
                             fontFamily: Font.fontfamily,
                             fontWeight: FontWeight.bold,
-                            fontSize: Sizer.getTextSize(context, 10)),
+                            fontSize: Sizer.getTextSize(context, 15)),
                         contentPadding: EdgeInsets.zero,
                         filled: true,
                         fillColor: Coloring.secondary,
@@ -528,7 +548,6 @@ class Code {
                 ),
                 Container(
                   width: Sizer.getWidth(context) / 1.5,
-                  height: Sizer.getHeight(context) / 10,
                   child: TextFormField(
                     maxLength: 10,
                     keyboardType: TextInputType.number,
@@ -547,12 +566,15 @@ class Code {
                       return null;
                     },
                     decoration: InputDecoration(
-                        suffixIcon: Icon(Icons.phone),
+                        suffixIcon: Icon(
+                          Icons.phone,
+                          size: Sizer.getTextSize(context, 20),
+                        ),
                         counterStyle: TextStyle(
                             color: Colors.red,
                             fontFamily: Font.fontfamily,
                             fontWeight: FontWeight.bold,
-                            fontSize: Sizer.getTextSize(context, 10)),
+                            fontSize: Sizer.getTextSize(context, 15)),
                         contentPadding: EdgeInsets.zero,
                         filled: true,
                         fillColor: Coloring.secondary,
@@ -694,7 +716,6 @@ class Code {
               key: formstate,
               child: Container(
                 width: Sizer.getWidth(context) / 1.5,
-                height: Sizer.getHeight(context) / 10,
                 child: TextFormField(
                   keyboardType:
                       isName ? TextInputType.name : TextInputType.number,
@@ -718,7 +739,7 @@ class Code {
                           color: Colors.red,
                           fontFamily: Font.fontfamily,
                           fontWeight: FontWeight.bold,
-                          fontSize: Sizer.getTextSize(context, 10)),
+                          fontSize: Sizer.getTextSize(context, 15)),
                       contentPadding: EdgeInsets.zero,
                       filled: true,
                       fillColor: Coloring.secondary,

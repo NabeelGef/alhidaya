@@ -1,6 +1,5 @@
 import 'package:alhidaya/Constant/color.dart';
 import 'package:alhidaya/Constant/sizer.dart';
-import 'package:alhidaya/main.dart';
 import 'package:flutter/material.dart';
 
 import '../../Constant/code.dart';
@@ -15,12 +14,6 @@ class AdultScreen extends StatefulWidget {
 
 class _AdultScreenState extends State<AdultScreen> {
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
-
-  @override
-  void initState() {
-    print("DATA NAME : ${data['name']}");
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +56,12 @@ class _AdultScreenState extends State<AdultScreen> {
                             borderRadius: BorderRadius.circular(25)),
                         child: Column(
                           children: [
-                            Image.asset("${Font.url}addstudent.png"),
+                            Image.asset(
+                              "${Font.url}addstudent.png",
+                              fit: BoxFit.cover,
+                              width: Sizer.getTextSize(context, 50),
+                              height: Sizer.getTextSize(context, 50),
+                            ),
                             Text(
                               "إضافة طالب",
                               style: TextStyle(
@@ -89,7 +87,12 @@ class _AdultScreenState extends State<AdultScreen> {
                             borderRadius: BorderRadius.circular(25)),
                         child: Column(
                           children: [
-                            Image.asset("${Font.url}students.png"),
+                            Image.asset(
+                              "${Font.url}students.png",
+                              fit: BoxFit.cover,
+                              width: Sizer.getTextSize(context, 50),
+                              height: Sizer.getTextSize(context, 50),
+                            ),
                             Text(
                               "عرض الطلاب",
                               style: TextStyle(

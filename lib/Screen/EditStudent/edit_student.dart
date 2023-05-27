@@ -107,7 +107,12 @@ class _EditStudentState extends State<EditStudent> {
                               backgroundImage:
                                   myimage != null ? FileImage(myimage!) : null,
                               child: myimage == null
-                                  ? Image.asset("${Font.url}addimage.png")
+                                  ? Image.asset(
+                                      "${Font.url}addimage.png",
+                                      fit: BoxFit.cover,
+                                      width: Sizer.getTextSize(context, 50),
+                                      height: Sizer.getTextSize(context, 50),
+                                    )
                                   : null),
                         ),
                       ),
@@ -144,7 +149,7 @@ class _EditStudentState extends State<EditStudent> {
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
-                            MakeTextFormField(className, TextInputType.name,
+                            MakeTextFormField(className, TextInputType.number,
                                 "الصّفّ الدّراسي"),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
@@ -206,10 +211,9 @@ class _EditStudentState extends State<EditStudent> {
                                 child: Container(
                                   margin: EdgeInsets.only(
                                       top: Sizer.getTextSize(context, 25)),
-                                  width: Sizer.getWidth(context) / 2.5,
-                                  height: Sizer.getHeight(context) / 10,
+                                  width: Sizer.getWidth(context) / 2,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(50),
                                     color: Coloring.secondary,
                                   ),
                                   child: Row(
@@ -218,6 +222,9 @@ class _EditStudentState extends State<EditStudent> {
                                     children: [
                                       Image.asset(
                                         "${Font.url}done.png",
+                                        fit: BoxFit.cover,
+                                        width: Sizer.getTextSize(context, 50),
+                                        height: Sizer.getTextSize(context, 50),
                                       ),
                                       Text("حفظ \n التعديلات",
                                           textAlign: TextAlign.center,
@@ -232,6 +239,9 @@ class _EditStudentState extends State<EditStudent> {
                                   ),
                                 ),
                               ),
+                            ),
+                            SizedBox(
+                              height: 50,
                             )
                           ],
                         )),

@@ -134,8 +134,8 @@ class _MyProfileState extends State<MyProfile> {
                                 ? Image.asset(
                                     "${Font.url}user.png",
                                     fit: BoxFit.cover,
-                                    width: Sizer.getWidth(context) / 10,
-                                    height: Sizer.getWidth(context) / 10,
+                                    width: Sizer.getTextSize(context, 50),
+                                    height: Sizer.getTextSize(context, 50),
                                   )
                                 : null),
                       ),
@@ -196,11 +196,11 @@ class _MyProfileState extends State<MyProfile> {
                           },
                           child: CircleAvatar(
                               backgroundColor: Coloring.secondary,
-                              radius: Sizer.getTextSize(context, 25),
+                              radius: Sizer.getTextSize(context, 15),
                               child: Icon(
                                 Icons.edit,
                                 color: Colors.black,
-                                size: Sizer.getTextSize(context, 25),
+                                size: Sizer.getTextSize(context, 20),
                               )),
                         )
                       ],
@@ -359,7 +359,12 @@ class _MyProfileState extends State<MyProfile> {
                                       fontSize: Sizer.getTextSize(context, 20),
                                       fontWeight: FontWeight.bold,
                                       fontFamily: Font.fontfamily)),
-                              Image.asset("${Font.url}deleteuser.png")
+                              Image.asset(
+                                "${Font.url}deleteuser.png",
+                                fit: BoxFit.cover,
+                                width: Sizer.getTextSize(context, 50),
+                                height: Sizer.getTextSize(context, 50),
+                              )
                             ],
                           ),
                         ),
