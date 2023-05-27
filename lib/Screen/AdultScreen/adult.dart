@@ -1,5 +1,6 @@
 import 'package:alhidaya/Constant/color.dart';
 import 'package:alhidaya/Constant/sizer.dart';
+import 'package:alhidaya/main.dart';
 import 'package:flutter/material.dart';
 
 import '../../Constant/code.dart';
@@ -14,6 +15,12 @@ class AdultScreen extends StatefulWidget {
 
 class _AdultScreenState extends State<AdultScreen> {
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
+
+  @override
+  void initState() {
+    print("DATA NAME : ${data['name']}");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

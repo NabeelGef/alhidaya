@@ -17,4 +17,3 @@ class Sizer {
   }
   //data
 }
-//https://github.com/NabeelGef/alhidaya.git

@@ -162,7 +162,7 @@ class _AddStudentState extends State<AddStudent> {
                                             profile: myimage?.path,
                                             name: name.text,
                                             classname:
-                                                className.text.toString(),
+                                                int.parse(className.text),
                                             address: address.text,
                                             work: work.text,
                                             phone: int.parse(phoneNumber.text),
@@ -177,8 +177,8 @@ class _AddStudentState extends State<AddStudent> {
                                 child: Container(
                                   margin: EdgeInsets.only(
                                       top: Sizer.getTextSize(context, 25)),
-                                  width: Sizer.getWidth(context) / 2.5,
-                                  height: Sizer.getHeight(context) / 10,
+                                  width: Sizer.getWidth(context) / 2,
+                                  height: Sizer.getHeight(context) / 8,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25),
                                     color: Coloring.secondary,
@@ -188,6 +188,7 @@ class _AddStudentState extends State<AddStudent> {
                                     children: [
                                       Image.asset("${Font.url}done.png"),
                                       Text("حفظ \n المعلومات",
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontFamily: Font.fontfamily,

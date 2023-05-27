@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../Constant/code.dart';
 import '../../Constant/font.dart';
+import '../../Model/Student.dart';
 import '../../Model/databasehelper.dart';
 
 class ShowStudent extends StatefulWidget {
@@ -52,77 +53,115 @@ class _ShowStudentState extends State<ShowStudent> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
-                        children: [
-                          Text("عدد الطّلاب",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: Sizer.getTextSize(context, 20),
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: Font.fontfamily)),
-                          Container(
-                            width: Sizer.getWidth(context) / 5,
-                            height: Sizer.getHeight(context) / 20,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: Coloring.secondary,
-                                borderRadius: BorderRadius.circular(25)),
-                            child: Text("100",
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text("عدد الطّلاب",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Sizer.getTextSize(context, 20),
+                                    fontSize: Sizer.getTextSize(context, 17),
                                     fontWeight: FontWeight.bold,
                                     fontFamily: Font.fontfamily)),
-                          )
-                        ],
+                            FutureBuilder<List<Student?>>(
+                                future: dp.getAllStudents(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Container(
+                                      //width: Sizer.getWidth(context) / 5,
+                                      height: Sizer.getHeight(context) / 20,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          color: Coloring.secondary,
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: Text("${snapshot.data!.length}",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Sizer.getTextSize(
+                                                  context, 20),
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: Font.fontfamily)),
+                                    );
+                                  } else {
+                                    return Container(
+                                      //width: Sizer.getWidth(context) / 5,
+                                      height: Sizer.getHeight(context) / 20,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          color: Coloring.secondary,
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      child: Text("انتظر...",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Sizer.getTextSize(
+                                                  context, 20),
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: Font.fontfamily)),
+                                    );
+                                  }
+                                })
+                          ],
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Text("اسم المشرف",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: Sizer.getTextSize(context, 20),
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: Font.fontfamily)),
-                          Container(
-                            width: Sizer.getWidth(context) / 2,
-                            height: Sizer.getHeight(context) / 20,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: Coloring.secondary,
-                                borderRadius: BorderRadius.circular(25)),
-                            child: Text("محمد نبيل الغفري",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Sizer.getTextSize(context, 15),
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: Font.fontfamily)),
-                          )
-                        ],
+                      SizedBox(
+                        width: 5,
                       ),
-                      Column(
-                        children: [
-                          Text("رقم الحلقة",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: Sizer.getTextSize(context, 20),
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: Font.fontfamily)),
-                          Container(
-                            width: Sizer.getWidth(context) / 5,
-                            height: Sizer.getHeight(context) / 20,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: Coloring.secondary,
-                                borderRadius: BorderRadius.circular(25)),
-                            child: Text("10",
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Text("اسم المشرف",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: Sizer.getTextSize(context, 20),
+                                    fontSize: Sizer.getTextSize(context, 18),
                                     fontWeight: FontWeight.bold,
                                     fontFamily: Font.fontfamily)),
-                          )
-                        ],
+                            Container(
+                              //width: Sizer.getWidth(context) / 2,
+                              height: Sizer.getHeight(context) / 20,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Coloring.secondary,
+                                  borderRadius: BorderRadius.circular(25)),
+                              child: Text("${data['name']}",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: Sizer.getTextSize(context, 15),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: Font.fontfamily)),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text("رقم الحلقة",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: Sizer.getTextSize(context, 18),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: Font.fontfamily)),
+                            Container(
+                              //width: Sizer.getWidth(context) / 5,
+                              height: Sizer.getHeight(context) / 20,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Coloring.secondary,
+                                  borderRadius: BorderRadius.circular(25)),
+                              child: Text("${data['numberRing']}",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: Sizer.getTextSize(context, 20),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: Font.fontfamily)),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -178,8 +217,12 @@ class _ShowStudentState extends State<ShowStudent> {
                                                   },
                                                 ));
                                               },
-                                              child: Icon(Icons.arrow_back_ios,
-                                                  color: Colors.black)),
+                                              child: Icon(
+                                                Icons.arrow_back_ios,
+                                                color: Colors.black,
+                                                size: Sizer.getTextSize(
+                                                    context, 25),
+                                              )),
                                           Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
@@ -197,7 +240,7 @@ class _ShowStudentState extends State<ShowStudent> {
                                                       fontFamily:
                                                           Font.fontfamily)),
                                               Text(
-                                                  "عدد النّفاط : ${snapshot.data![index]?.getPoints}",
+                                                  "عدد النّقاط : ${snapshot.data![index]?.getPoints}",
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize:

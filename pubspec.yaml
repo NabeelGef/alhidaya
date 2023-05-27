@@ -34,7 +34,12 @@ dependencies:
   get_it: ^7.6.0
   image_picker: ^0.8.3
   path_provider: ^2.0.15
+  device_preview: ^1.1.0
   sqflite: ^2.2.8+4
+  shared_preferences: ^2.1.1
+  flutter_screenutil: ^5.7.0
+  responsive_framework: ^0.2.0
+  
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -67,7 +72,7 @@ flutter:
   fonts:
     - family: Nabeel
       fonts:
-        - asset: assets/font/motken.ttf
+        - asset: assets/font/noto.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

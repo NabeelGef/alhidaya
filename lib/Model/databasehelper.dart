@@ -61,7 +61,8 @@ class DataBaseHelper {
           work: maps[index]['work'],
           phone: maps[index]['phone'],
           ringnum: maps[index]['ringnum'],
-          points: maps[index]['points']);
+          points: maps[index]['points'],
+          notes: maps[index]['notes']);
     });
   }
 

@@ -2,7 +2,7 @@
 class Student {
   String? profile;
   String name;
-  String classname;
+  int classname;
   String address;
   String work;
   String? notes;
@@ -70,7 +70,8 @@ class Student {
       required this.work,
       required this.phone,
       required this.ringnum,
-      required this.points});
+      required this.points,
+      this.notes});
 
   @override
   String toString() {

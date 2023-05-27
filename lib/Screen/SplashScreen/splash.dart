@@ -5,6 +5,8 @@ import 'package:alhidaya/Constant/font.dart';
 import 'package:alhidaya/Constant/sizer.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+
 class Splash extends StatefulWidget {
   const Splash({super.key});
 
@@ -16,8 +18,13 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     // تنتهي ظهور الواجهة لمدة 5 ثواني
-    Timer(const Duration(seconds: 5),
-        () => Navigator.pushReplacementNamed(context, "/adult"));
+    Timer(const Duration(seconds: 5), () async {
+      if (data['name'] == null) {
+        Navigator.pushReplacementNamed(context, "/login");
+      } else {
+        Navigator.pushReplacementNamed(context, "/adult");
+      }
+    });
     super.initState();
   }
 

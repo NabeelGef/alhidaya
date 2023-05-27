@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:alhidaya/Constant/color.dart';
 import 'package:alhidaya/Constant/font.dart';
 import 'package:alhidaya/Constant/sizer.dart';
+import 'package:alhidaya/Screen/MyProfile/controller_myprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../Model/AcceptInfo.dart';
 import '../Screen/StudentProfile/controller_profle.dart';
+import '../main.dart';
 
 class Code {
   static getDrawer(BuildContext context, GlobalKey<ScaffoldState> scaffoldkey) {
@@ -42,11 +44,15 @@ class Code {
                               )),
                         ),
                         CircleAvatar(
-                          radius: Sizer.getWidth(context) / 10,
-                          backgroundColor: Colors.transparent,
-                          child: Image.asset("${Font.url}user.png"),
-                        ),
-                        Text("محمد نبيل الغفري",
+                            radius: Sizer.getWidth(context) / 10,
+                            backgroundColor: Coloring.secondary,
+                            backgroundImage: data['photo'] != null
+                                ? FileImage(File(data['photo']!))
+                                : null,
+                            child: data['photo'] == null
+                                ? Image.asset("${Font.url}user.png")
+                                : null),
+                        Text("${data['name']}",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: Sizer.getTextSize(context, 25),
@@ -61,42 +67,42 @@ class Code {
               ),
               Column(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      // Navigator.pushNamedAndRemoveUntil(
-                      //     context, "/adult", (route) => false);
-                    },
-                    child: Container(
-                      margin:
-                          EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
-                      height: Sizer.getHeight(context) / 15,
-                      color: Coloring.primary,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: Text(
-                                "الصفحة الرّئيسيّة",
-                                style: TextStyle(
-                                    fontSize: Sizer.getTextSize(context, 20),
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: Font.fontfamily),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Icon(
-                              Icons.home,
-                              color: Colors.black,
-                              size: Sizer.getTextSize(context, 25),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     // Navigator.pushNamedAndRemoveUntil(
+                  //     //     context, "/adult", (route) => false);
+                  //   },
+                  //   child: Container(
+                  //     margin:
+                  //         EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
+                  //     height: Sizer.getHeight(context) / 15,
+                  //     color: Coloring.primary,
+                  //     child: Row(
+                  //       children: [
+                  //         Expanded(
+                  //           flex: 2,
+                  //           child: Center(
+                  //             child: Text(
+                  //               "الصفحة الرّئيسيّة",
+                  //               style: TextStyle(
+                  //                   fontSize: Sizer.getTextSize(context, 20),
+                  //                   color: Colors.black,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   fontFamily: Font.fontfamily),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         Expanded(
+                  //           child: Icon(
+                  //             Icons.home,
+                  //             color: Colors.black,
+                  //             size: Sizer.getTextSize(context, 25),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   InkWell(
                     onTap: () {
                       Navigator.pushNamedAndRemoveUntil(
@@ -133,34 +139,39 @@ class Code {
                       ),
                     ),
                   ),
-                  Container(
-                    margin:
-                        EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
-                    height: Sizer.getHeight(context) / 15,
-                    color: Coloring.primary,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Center(
-                            child: Text(
-                              "الحساب الشّخصي",
-                              style: TextStyle(
-                                  fontSize: Sizer.getTextSize(context, 20),
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: Font.fontfamily),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/myprofile');
+                    },
+                    child: Container(
+                      margin:
+                          EdgeInsets.only(top: Sizer.getTextSize(context, 25)),
+                      height: Sizer.getHeight(context) / 15,
+                      color: Coloring.primary,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Center(
+                              child: Text(
+                                "الحساب الشّخصي",
+                                style: TextStyle(
+                                    fontSize: Sizer.getTextSize(context, 20),
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: Font.fontfamily),
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Icon(
-                            Icons.account_circle,
-                            color: Colors.black,
-                            size: Sizer.getTextSize(context, 25),
+                          Expanded(
+                            child: Icon(
+                              Icons.account_circle,
+                              color: Colors.black,
+                              size: Sizer.getTextSize(context, 25),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -188,13 +199,12 @@ class Code {
       String text) {
     return AppBar(
       actions: [
-        IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
+        InkWell(
+          child: Icon(Icons.menu, size: Sizer.getTextSize(context, 50)),
+          onTap: () {
             scaffoldState.currentState!.openEndDrawer();
           },
-          iconSize: Sizer.getTextSize(
-              context, 50), // set the size of the end drawer icon
+          // set the size of the end drawer icon
         ),
       ],
       elevation: 0,
@@ -213,7 +223,7 @@ class Code {
         "$text",
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: Sizer.getTextSize(context, 25),
+            fontSize: Sizer.getTextSize(context, 23),
             color: Colors.white,
             fontFamily: Font.fontfamily,
             fontWeight: FontWeight.bold),
@@ -226,7 +236,7 @@ class Code {
     return AlertDialog(
       backgroundColor: Colors.transparent,
       content: Container(
-        height: Sizer.getHeight(context) / 3.1,
+        height: Sizer.getHeight(context) / 2.5,
         width: Sizer.getWidth(context) / 1.4,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
@@ -237,8 +247,8 @@ class Code {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.asset("${Font.url}accept.png",
-                width: Sizer.getWidth(context) / 3,
-                height: Sizer.getWidth(context) / 3),
+                width: Sizer.getWidth(context) / 4,
+                height: Sizer.getWidth(context) / 4),
             Text(
               "$text",
               textAlign: TextAlign.center,
@@ -367,7 +377,7 @@ class Code {
                 width: Sizer.getWidth(context) / 3,
                 height: Sizer.getWidth(context) / 3),
             Text(
-              "تأكيد حذف الطّالب",
+              "هل تريد تأكيد الحذف ؟",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.black,
@@ -432,6 +442,394 @@ class Code {
                       ],
                     ),
                   ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget makeAlertEditNameAndNumber(
+      BuildContext context,
+      ControllerMyProfile controllerMyProfile,
+      AcceptInfo acceptInfo,
+      TextEditingController controllerName,
+      TextEditingController controllerPhone,
+      GlobalKey<FormState> formstate) {
+    return AlertDialog(
+      backgroundColor: Colors.transparent,
+      content: Container(
+        height: Sizer.getHeight(context) / 2.5,
+        width: Sizer.getWidth(context) / 1.4,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            image: DecorationImage(
+                image: AssetImage("${Font.url}background.png"),
+                fit: BoxFit.fill)),
+        child: Form(
+            key: formstate,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: Sizer.getWidth(context) / 1.5,
+                  height: Sizer.getHeight(context) / 10,
+                  child: TextFormField(
+                    maxLength: 20,
+                    textDirection: TextDirection.rtl,
+                    controller: controllerName,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Sizer.getTextSize(context, 20),
+                        fontFamily: Font.fontfamily),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return " يجب ملأ هذا الحقل ";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        suffixIcon: Icon(Icons.person_2),
+                        counterStyle: TextStyle(
+                            color: Colors.red,
+                            fontFamily: Font.fontfamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizer.getTextSize(context, 10)),
+                        contentPadding: EdgeInsets.zero,
+                        filled: true,
+                        fillColor: Coloring.secondary,
+                        errorStyle: TextStyle(
+                            color: Colors.red,
+                            fontFamily: Font.fontfamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizer.getTextSize(context, 10)),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 2)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.transparent)),
+                        hintText: "إسم المشرف الجديد",
+                        hintTextDirection: TextDirection.rtl,
+                        hintStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizer.getTextSize(context, 20),
+                            fontFamily: Font.fontfamily)),
+                  ),
+                ),
+                Container(
+                  width: Sizer.getWidth(context) / 1.5,
+                  height: Sizer.getHeight(context) / 10,
+                  child: TextFormField(
+                    maxLength: 10,
+                    keyboardType: TextInputType.number,
+                    textDirection: TextDirection.rtl,
+                    controller: controllerPhone,
+                    cursorColor: Colors.black,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Sizer.getTextSize(context, 20),
+                        fontFamily: Font.fontfamily),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return " يجب ملأ هذا الحقل ";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                        suffixIcon: Icon(Icons.phone),
+                        counterStyle: TextStyle(
+                            color: Colors.red,
+                            fontFamily: Font.fontfamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizer.getTextSize(context, 10)),
+                        contentPadding: EdgeInsets.zero,
+                        filled: true,
+                        fillColor: Coloring.secondary,
+                        errorStyle: TextStyle(
+                            color: Colors.red,
+                            fontFamily: Font.fontfamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizer.getTextSize(context, 10)),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.red)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide(color: Colors.transparent)),
+                        hintText: "رقم الموبايل الجديد",
+                        hintTextDirection: TextDirection.rtl,
+                        hintStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: Sizer.getTextSize(context, 20),
+                            fontFamily: Font.fontfamily)),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Coloring.secondary,
+                              borderRadius: BorderRadius.circular(15)),
+                          alignment: Alignment.center,
+                          width: Sizer.getWidth(context) / 4,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  "إلغاء",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: Sizer.getTextSize(context, 20),
+                                      fontFamily: Font.fontfamily),
+                                ),
+                              ),
+                              Expanded(
+                                  child: Image.asset("${Font.url}close.png"))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          if (formstate.currentState!.validate()) {
+                            controllerMyProfile.setterName(controllerName.text);
+                            controllerMyProfile
+                                .setterPhone(controllerPhone.text);
+                            acceptInfo.updateValue();
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Coloring.secondary,
+                              borderRadius: BorderRadius.circular(15)),
+                          alignment: Alignment.center,
+                          width: Sizer.getWidth(context) / 4,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  "تأكيد",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: Sizer.getTextSize(context, 20),
+                                      fontFamily: Font.fontfamily),
+                                ),
+                              ),
+                              Expanded(
+                                  child: Image.asset("${Font.url}done.png"))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                  ],
+                )
+              ],
+            )),
+      ),
+    );
+  }
+
+  static Widget makeAlertRing(
+      BuildContext context,
+      TextEditingController controllerRing,
+      String hint,
+      bool isName,
+      ControllerMyProfile myProfile,
+      GlobalKey<FormState> formstate) {
+    return AlertDialog(
+      backgroundColor: Colors.transparent,
+      content: Container(
+        alignment: Alignment.center,
+        height: Sizer.getHeight(context) / 3.5,
+        width: Sizer.getWidth(context) / 1.4,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            image: DecorationImage(
+                image: AssetImage("${Font.url}background.png"),
+                fit: BoxFit.fill)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Form(
+              key: formstate,
+              child: Container(
+                width: Sizer.getWidth(context) / 1.5,
+                height: Sizer.getHeight(context) / 10,
+                child: TextFormField(
+                  keyboardType:
+                      isName ? TextInputType.name : TextInputType.number,
+                  maxLength: isName ? 30 : 3,
+                  textDirection: TextDirection.rtl,
+                  controller: controllerRing,
+                  cursorColor: Colors.black,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: Sizer.getTextSize(context, 20),
+                      fontFamily: Font.fontfamily),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return " يجب ملأ هذا الحقل ";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      counterStyle: TextStyle(
+                          color: Colors.red,
+                          fontFamily: Font.fontfamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: Sizer.getTextSize(context, 10)),
+                      contentPadding: EdgeInsets.zero,
+                      filled: true,
+                      fillColor: Coloring.secondary,
+                      errorStyle: TextStyle(
+                          color: Colors.red,
+                          fontFamily: Font.fontfamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: Sizer.getTextSize(context, 15)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.red, width: 2)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.transparent)),
+                      hintText: hint,
+                      hintTextDirection: TextDirection.rtl,
+                      hintStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: Sizer.getTextSize(context, 20),
+                          fontFamily: Font.fontfamily)),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Coloring.secondary,
+                          borderRadius: BorderRadius.circular(15)),
+                      alignment: Alignment.center,
+                      width: Sizer.getWidth(context) / 4,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "إلغاء",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizer.getTextSize(context, 20),
+                                  fontFamily: Font.fontfamily),
+                            ),
+                          ),
+                          Expanded(child: Image.asset("${Font.url}close.png"))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      if (formstate.currentState!.validate()) {
+                        if (isName) {
+                          myProfile.setterNameRing(controllerRing.text);
+                        } else {
+                          myProfile.setterNumRing(controllerRing.text);
+                          print("Text is : ${controllerRing.text}");
+                        }
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Coloring.secondary,
+                          borderRadius: BorderRadius.circular(15)),
+                      alignment: Alignment.center,
+                      width: Sizer.getWidth(context) / 4,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "تأكيد",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizer.getTextSize(context, 20),
+                                  fontFamily: Font.fontfamily),
+                            ),
+                          ),
+                          Expanded(child: Image.asset("${Font.url}done.png"))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
                 ),
               ],
             )

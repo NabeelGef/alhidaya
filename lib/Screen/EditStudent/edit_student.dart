@@ -43,7 +43,8 @@ class _EditStudentState extends State<EditStudent> {
   void initState() {
     name = TextEditingController(text: widget.student?.name);
     phoneNumber = TextEditingController(text: widget.student?.phone.toString());
-    className = TextEditingController(text: widget.student?.classname);
+    className =
+        TextEditingController(text: widget.student?.classname.toString());
     ringnum = TextEditingController(text: widget.student?.ringnum.toString());
     address = TextEditingController(text: widget.student?.address);
     work = TextEditingController(text: widget.student?.work);
@@ -185,7 +186,7 @@ class _EditStudentState extends State<EditStudent> {
                                             profile: myimage?.path,
                                             name: name.text,
                                             classname:
-                                                className.text.toString(),
+                                                int.parse(className.text),
                                             address: address.text,
                                             work: work.text,
                                             phone: int.parse(phoneNumber.text),
@@ -212,10 +213,14 @@ class _EditStudentState extends State<EditStudent> {
                                     color: Coloring.secondary,
                                   ),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     textDirection: TextDirection.rtl,
                                     children: [
-                                      Image.asset("${Font.url}done.png"),
+                                      Image.asset(
+                                        "${Font.url}done.png",
+                                      ),
                                       Text("حفظ \n التعديلات",
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontFamily: Font.fontfamily,
