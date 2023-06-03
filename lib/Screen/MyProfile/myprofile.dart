@@ -29,11 +29,13 @@ class _MyProfileState extends State<MyProfile> {
   late String? ringName;
   late String? numRing;
   late String? photo;
+  late String? stateRing;
   late ControllerMyProfile controllerMyProfile;
   StreamSubscription<String>? streamSubscriptionName;
   StreamSubscription<String>? streamSubscriptionPhone;
   StreamSubscription<String>? streamSubscriptionNumberRing;
   StreamSubscription<String>? streamSubscriptionNameRing;
+  StreamSubscription<String>? streamSubscriptionStateRing;
 
   AcceptInfo acceptInfo = AcceptInfo();
   AcceptInfo acceptInfoForDelete = AcceptInfo();
@@ -42,6 +44,7 @@ class _MyProfileState extends State<MyProfile> {
   late TextEditingController controllerPhone;
   late TextEditingController controllerRingName;
   late TextEditingController controllerRingNumber;
+  late TextEditingController controllerStateNumber;
   GlobalKey<FormState> formstate = GlobalKey();
 
   @override
@@ -51,15 +54,17 @@ class _MyProfileState extends State<MyProfile> {
     ringName = data['nameRing'];
     numRing = data['numberRing'];
     photo = data['photo'];
+    stateRing = data['stateRing'];
     if (photo != null) {
       myimage = File(photo!);
     }
     controllerMyProfile =
-        ControllerMyProfile(name, numberPhone, ringName, numRing);
+        ControllerMyProfile(name, numberPhone, ringName, numRing, stateRing);
     controllerName = TextEditingController(text: name);
     controllerPhone = TextEditingController(text: numberPhone);
     controllerRingName = TextEditingController(text: ringName);
     controllerRingNumber = TextEditingController(text: numRing);
+    controllerStateNumber = TextEditingController(text: stateRing);
 
     super.initState();
   }
@@ -70,6 +75,7 @@ class _MyProfileState extends State<MyProfile> {
     controllerPhone.clear();
     controllerRingName.clear();
     controllerRingNumber.clear();
+    controllerStateNumber.clear();
     super.dispose();
   }
 
@@ -114,17 +120,17 @@ class _MyProfileState extends State<MyProfile> {
                     SizedBox(
                       height: 20,
                     ),
-                    InkWell(
-                      onTap: () {
-                        scaffoldState.currentState!.showBottomSheet(
-                          (context) {
-                            return Code.makeSheet(context, updateState);
-                          },
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(15),
-                        alignment: Alignment.center,
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                        onTap: () {
+                          scaffoldState.currentState!.showBottomSheet(
+                            (context) {
+                              return Code.makeSheet(context, updateState);
+                            },
+                          );
+                        },
                         child: CircleAvatar(
                             radius: Sizer.getWidth(context) / 10,
                             backgroundColor: Coloring.secondary,
@@ -221,7 +227,7 @@ class _MyProfileState extends State<MyProfile> {
                                     context,
                                     controllerRingNumber,
                                     "ادخل رقم الحلقة الجديد ",
-                                    false,
+                                    2,
                                     controllerMyProfile,
                                     formstate);
                               },
@@ -275,9 +281,65 @@ class _MyProfileState extends State<MyProfile> {
                               builder: (context) {
                                 return Code.makeAlertRing(
                                     context,
+                                    controllerStateNumber,
+                                    "ادخل مستوى الحلقة الجديد ",
+                                    3,
+                                    controllerMyProfile,
+                                    formstate);
+                              },
+                            );
+
+                            streamSubscriptionStateRing ??= controllerMyProfile
+                                .onValueStateRingChanged
+                                .listen((event) {
+                              stateRing = event;
+                              SharedBase.editState(stateRing!);
+                              setState(() {});
+                            });
+                          },
+                          child: SingleChildScrollView(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Coloring.secondary,
+                                  borderRadius: BorderRadius.circular(15)),
+                              height: Sizer.getHeight(context) / 4.5,
+                              width: Sizer.getWidth(context) / 3,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Text("تعديل المستوى ",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize:
+                                                Sizer.getTextSize(context, 20),
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: Font.fontfamily)),
+                                    Icon(Icons.edit_document,
+                                        size: Sizer.getTextSize(context, 25)),
+                                    Text("$stateRing",
+                                        style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize:
+                                                Sizer.getTextSize(context, 15),
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: Font.fontfamily))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Code.makeAlertRing(
+                                    context,
                                     controllerRingName,
                                     "ادخل اسم الحلقة الجديد ",
-                                    true,
+                                    1,
                                     controllerMyProfile,
                                     formstate);
                               },
@@ -356,14 +418,14 @@ class _MyProfileState extends State<MyProfile> {
                               Text("حذف الحساب ",
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: Sizer.getTextSize(context, 20),
+                                      fontSize: Sizer.getTextSize(context, 25),
                                       fontWeight: FontWeight.bold,
                                       fontFamily: Font.fontfamily)),
                               Image.asset(
                                 "${Font.url}deleteuser.png",
                                 fit: BoxFit.cover,
-                                width: Sizer.getTextSize(context, 50),
-                                height: Sizer.getTextSize(context, 50),
+                                width: Sizer.getTextSize(context, 60),
+                                height: Sizer.getTextSize(context, 60),
                               )
                             ],
                           ),

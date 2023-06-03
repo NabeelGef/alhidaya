@@ -179,7 +179,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       ],
                     ),
                     const SizedBox(
-                      height: 25,
+                      height: 10,
                     ),
                     Center(
                       child: CircleAvatar(
@@ -284,16 +284,44 @@ class _StudentProfileState extends State<StudentProfile> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 5,
+                    ),
+                    Center(
+                      child: Column(
+                        children: [
+                          Text("مستوى الحلقة ",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: Sizer.getTextSize(context, 18),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: Font.fontfamily)),
+                          Container(
+                            width: Sizer.getWidth(context) / 2,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: Coloring.secondary,
+                                borderRadius: BorderRadius.circular(25)),
+                            child: Text(data['stateRing']!,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: Sizer.getTextSize(context, 15),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: Font.fontfamily)),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Container(
-                      height: Sizer.getHeight(context) / 3,
+                      height: Sizer.getHeight(context) / 6,
                       width: Sizer.getWidth(context) / 1.1,
                       child: Form(
                           child: TextFormField(
+                        maxLines: 10000000,
+                        textInputAction: TextInputAction.newline,
                         cursorColor: Colors.black,
-                        maxLines: 10,
-                        maxLength: 250,
                         textDirection: TextDirection.rtl,
                         controller: controllerNotes,
                         style: TextStyle(
@@ -302,11 +330,6 @@ class _StudentProfileState extends State<StudentProfile> {
                             fontWeight: FontWeight.bold,
                             fontFamily: Font.fontfamily),
                         decoration: InputDecoration(
-                            counterStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                                fontSize: Sizer.getTextSize(context, 15),
-                                fontFamily: Font.fontfamily),
                             filled: true,
                             fillColor: Coloring.secondary,
                             focusedBorder: const UnderlineInputBorder(
@@ -330,18 +353,29 @@ class _StudentProfileState extends State<StudentProfile> {
                                 fontFamily: Font.fontfamily)),
                       )),
                     ),
-                    Image.asset(
-                      "${Font.url}star.png",
-                      fit: BoxFit.cover,
-                      width: Sizer.getTextSize(context, 50),
-                      height: Sizer.getTextSize(context, 50),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.asset(
+                          "${Font.url}star.png",
+                          fit: BoxFit.cover,
+                          width: Sizer.getTextSize(context, 50),
+                          height: Sizer.getTextSize(context, 50),
+                        ),
+                        Text("مجموع النّقاط",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Sizer.getTextSize(context, 20),
+                                fontWeight: FontWeight.bold,
+                                fontFamily: Font.fontfamily)),
+                        Image.asset(
+                          "${Font.url}star.png",
+                          fit: BoxFit.cover,
+                          width: Sizer.getTextSize(context, 50),
+                          height: Sizer.getTextSize(context, 50),
+                        ),
+                      ],
                     ),
-                    Text("مجموع النّقاط",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: Sizer.getTextSize(context, 20),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: Font.fontfamily)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

@@ -18,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController controllerNumPhone = TextEditingController();
   TextEditingController controllerNameRing = TextEditingController();
   TextEditingController controllerNumRing = TextEditingController();
+  TextEditingController controllerstate = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: Sizer.getHeight(context) / 50,
                               ),
                               MakeTextFormField(controllerName,
-                                  TextInputType.text, 'الإسم و الكنية', 30),
+                                  TextInputType.text, 'الاسم و الكنية', 30),
                               SizedBox(
                                 height: Sizer.getHeight(context) / 50,
                               ),
@@ -94,6 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               MakeTextFormField(controllerNumRing,
                                   TextInputType.number, 'رقم الحلقة', 3),
+                              SizedBox(
+                                height: Sizer.getHeight(context) / 50,
+                              ),
+                              MakeTextFormField(controllerstate,
+                                  TextInputType.number, 'المستوى التجويدي', 3),
                               SizedBox(
                                 height: Sizer.getHeight(context) / 50,
                               ),
@@ -115,11 +121,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               data = await SharedBase.saveUserData(
-                                controllerName.text,
-                                controllerNumPhone.text,
-                                controllerNameRing.text,
-                                controllerNumRing.text,
-                              );
+                                  controllerName.text,
+                                  controllerNumPhone.text,
+                                  controllerNameRing.text,
+                                  controllerNumRing.text,
+                                  controllerstate.text);
                               Navigator.pushReplacementNamed(context, "/adult");
                             } else {
                               print("Failure");
@@ -167,6 +173,11 @@ class _LoginScreenState extends State<LoginScreen> {
       validator: (value) {
         if (value!.isEmpty) {
           return "يجب ملئ الحقل ";
+        }
+        if (labelText == "رقم الموبايل") {
+          if (value.length < 10) {
+            return "يجب أن يتألّف من 10 أرقام";
+          }
         }
         return null;
       },

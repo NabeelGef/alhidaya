@@ -70,17 +70,17 @@ class _AddStudentState extends State<AddStudent> {
                 children: [
                   Row(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          scaffoldState.currentState!.showBottomSheet(
-                            (context) {
-                              return Code.makeSheet(context, updateState);
-                            },
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(15),
-                          alignment: Alignment.centerLeft,
+                      Container(
+                        padding: EdgeInsets.all(15),
+                        alignment: Alignment.centerLeft,
+                        child: InkWell(
+                          onTap: () {
+                            scaffoldState.currentState!.showBottomSheet(
+                              (context) {
+                                return Code.makeSheet(context, updateState);
+                              },
+                            );
+                          },
                           child: CircleAvatar(
                               radius: Sizer.getWidth(context) / 10,
                               backgroundColor: Coloring.secondary,
@@ -120,32 +120,32 @@ class _AddStudentState extends State<AddStudent> {
                               height: Sizer.getHeight(context) / 50,
                             ),
                             MakeTextFormField(
-                                name, TextInputType.name, "الاسم والكنية"),
+                                name, TextInputType.name, "الاسم والكنية", 25),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(phoneNumber, TextInputType.number,
-                                "رقم ولي الامر"),
+                                "رقم ولي الامر", 10),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(className, TextInputType.number,
-                                "الصّفّ الدّراسي"),
+                                "الصّفّ الدّراسي", 2),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(
-                                ringnum, TextInputType.number, "رقم الحلقة"),
+                                ringnum, TextInputType.number, "رقم الحلقة", 2),
+                            SizedBox(
+                              height: Sizer.getHeight(context) / 25,
+                            ),
+                            MakeTextFormField(address, TextInputType.text,
+                                "عنوان السّكن", 50),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(
-                                address, TextInputType.text, "عنوان السّكن"),
-                            SizedBox(
-                              height: Sizer.getHeight(context) / 25,
-                            ),
-                            MakeTextFormField(
-                                work, TextInputType.text, "عمل الوالد"),
+                                work, TextInputType.text, "عمل الوالد", 50),
                             Center(
                               child: InkWell(
                                 onTap: () async {
@@ -231,18 +231,25 @@ class _AddStudentState extends State<AddStudent> {
 
   @override
   void dispose() {
-    print("Dispossse");
     streamSubscription?.cancel();
+    streamSubscriptionfile?.cancel();
     super.dispose();
   }
 
-  MakeTextFormField(
-      TextEditingController controller, TextInputType type, String labelText) {
+  MakeTextFormField(TextEditingController controller, TextInputType type,
+      String labelText, int? counter) {
     return TextFormField(
       controller: controller,
+      maxLength: counter,
       validator: (value) {
         if (value!.isEmpty) {
           return "يجب ملئ الحقل ";
+        }
+        if (labelText == "رقم ولي الامر") {
+          print("LABLE : $labelText");
+          if (value.length < 10) {
+            return "يجب أن يتألّف من 10 أرقام";
+          }
         }
         return null;
       },
@@ -256,6 +263,11 @@ class _AddStudentState extends State<AddStudent> {
         color: Colors.black,
       ),
       decoration: InputDecoration(
+          counterStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: Font.fontfamily,
+              fontSize: Sizer.getTextSize(context, 15),
+              color: Colors.black),
           errorStyle: TextStyle(
               color: Colors.red,
               fontFamily: Font.fontfamily,

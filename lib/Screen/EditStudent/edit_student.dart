@@ -42,7 +42,8 @@ class _EditStudentState extends State<EditStudent> {
   @override
   void initState() {
     name = TextEditingController(text: widget.student?.name);
-    phoneNumber = TextEditingController(text: widget.student?.phone.toString());
+    phoneNumber =
+        TextEditingController(text: "0${widget.student?.phone.toString()}");
     className =
         TextEditingController(text: widget.student?.classname.toString());
     ringnum = TextEditingController(text: widget.student?.ringnum.toString());
@@ -90,17 +91,17 @@ class _EditStudentState extends State<EditStudent> {
                 children: [
                   Row(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          scaffoldState.currentState!.showBottomSheet(
-                            (context) {
-                              return Code.makeSheet(context, updateState);
-                            },
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(15),
-                          alignment: Alignment.centerLeft,
+                      Container(
+                        padding: EdgeInsets.all(15),
+                        alignment: Alignment.centerLeft,
+                        child: InkWell(
+                          onTap: () {
+                            scaffoldState.currentState!.showBottomSheet(
+                              (context) {
+                                return Code.makeSheet(context, updateState);
+                              },
+                            );
+                          },
                           child: CircleAvatar(
                               radius: Sizer.getWidth(context) / 10,
                               backgroundColor: Coloring.secondary,
@@ -140,35 +141,32 @@ class _EditStudentState extends State<EditStudent> {
                               height: Sizer.getHeight(context) / 50,
                             ),
                             MakeTextFormField(
-                                name, TextInputType.name, "الاسم والكنية"),
+                                name, TextInputType.name, "الاسم والكنية", 25),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(phoneNumber, TextInputType.number,
-                                "رقم ولي الامر"),
+                                "رقم ولي الامر", 10),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(className, TextInputType.number,
-                                "الصّفّ الدّراسي"),
+                                "الصّفّ الدّراسي", 2),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(
-                              ringnum,
-                              TextInputType.number,
-                              "رقم الحلقة",
+                                ringnum, TextInputType.number, "رقم الحلقة", 2),
+                            SizedBox(
+                              height: Sizer.getHeight(context) / 25,
                             ),
+                            MakeTextFormField(address, TextInputType.text,
+                                "عنوان السّكن", 50),
                             SizedBox(
                               height: Sizer.getHeight(context) / 25,
                             ),
                             MakeTextFormField(
-                                address, TextInputType.text, "عنوان السّكن"),
-                            SizedBox(
-                              height: Sizer.getHeight(context) / 25,
-                            ),
-                            MakeTextFormField(
-                                work, TextInputType.text, "عمل الوالد"),
+                                work, TextInputType.text, "عمل الوالد", 50),
                             Center(
                               child: InkWell(
                                 onTap: () {
@@ -196,7 +194,8 @@ class _EditStudentState extends State<EditStudent> {
                                             work: work.text,
                                             phone: int.parse(phoneNumber.text),
                                             ringnum: int.parse(ringnum.text),
-                                            points: widget.student!.points);
+                                            points: widget.student!.points,
+                                            notes: widget.student!.notes);
                                         dp.update(student.toMap());
                                         Navigator.pushAndRemoveUntil(context,
                                             MaterialPageRoute(
@@ -255,16 +254,22 @@ class _EditStudentState extends State<EditStudent> {
     );
   }
 
-  MakeTextFormField(
-      TextEditingController controller, TextInputType type, String labelText) {
+  MakeTextFormField(TextEditingController controller, TextInputType type,
+      String labelText, int? counter) {
     return TextFormField(
       controller: controller,
       validator: (value) {
         if (value!.isEmpty) {
           return "يجب ملئ الحقل ";
         }
+        if (labelText == "رقم ولي الامر") {
+          if (value.length < 10) {
+            return "يجب أن يتألّف من 10 أرقام";
+          }
+        }
         return null;
       },
+      maxLength: counter,
       textDirection: TextDirection.rtl,
       keyboardType: type,
       cursorColor: Colors.black,
@@ -275,6 +280,11 @@ class _EditStudentState extends State<EditStudent> {
         color: Colors.black,
       ),
       decoration: InputDecoration(
+          counterStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: Font.fontfamily,
+              fontSize: Sizer.getTextSize(context, 10),
+              color: Colors.black),
           errorStyle: TextStyle(
               color: Colors.red,
               fontFamily: Font.fontfamily,

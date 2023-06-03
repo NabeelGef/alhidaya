@@ -2,19 +2,30 @@ import 'package:alhidaya/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedBase {
-  static Future<Map<String, String?>> saveUserData(String name,
-      String phoneNumber, String nameRing, String numberRing) async {
+  static Future<Map<String, String?>> saveUserData(
+      String name,
+      String phoneNumber,
+      String nameRing,
+      String numberRing,
+      String stateRing) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
     await prefs.setString('phoneNumber', phoneNumber);
     await prefs.setString('nameRing', nameRing);
     await prefs.setString('numberRing', numberRing);
+    await prefs.setString('stateRing', stateRing);
     return await getUserData();
   }
 
   static Future<void> editName(String name) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('name', name);
+    data = await getUserData();
+  }
+
+  static Future<void> editState(String state) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('stateRing', state);
     data = await getUserData();
   }
 
@@ -48,6 +59,7 @@ class SharedBase {
     final phoneNumber = prefs.getString('phoneNumber');
     final nameRing = prefs.getString('nameRing');
     final numberRing = prefs.getString('numberRing');
+    final stateRing = prefs.getString('stateRing');
     var photo = prefs.getString('photo');
     if (photo != null && photo.isEmpty) {
       photo = null;
@@ -57,7 +69,8 @@ class SharedBase {
       'phoneNumber': phoneNumber,
       'nameRing': nameRing,
       'numberRing': numberRing,
-      'photo': photo
+      'photo': photo,
+      'stateRing': stateRing
     };
   }
 

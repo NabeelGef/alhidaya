@@ -283,78 +283,83 @@ class Code {
 
   static Widget makeSheet(BuildContext context, Function(File?) selecteImage) {
     ControllerProfile controller = ControllerProfile();
-    return Container(
-      width: Sizer.getWidth(context),
-      height: Sizer.getHeight(context) / 4,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-          image: DecorationImage(
-              image: AssetImage("${Font.url}background.png"),
-              fit: BoxFit.fill)),
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        InkWell(
-          onTap: () async {
-            controller.updateValue(await _getImageFromGallery());
-            selecteImage(controller.getImage);
-            Navigator.pop(context);
-          },
-          child: Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  "اختيار الصورة من المعرض ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: Sizer.getTextSize(context, 25)),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Container(
+        width: Sizer.getWidth(context),
+        height: Sizer.getHeight(context) / 4,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+            image: DecorationImage(
+                image: AssetImage("${Font.url}background.png"),
+                fit: BoxFit.fill)),
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          InkWell(
+            onTap: () async {
+              controller.updateValue(await _getImageFromGallery());
+              selecteImage(controller.getImage);
+              Navigator.pop(context);
+            },
+            child: Row(
+              textDirection: TextDirection.rtl,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    "اختيار الصورة من المعرض ",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Sizer.getTextSize(context, 25)),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Image.asset(
-                  "${Font.url}gallery.png",
-                  width: Sizer.getWidth(context) / 10,
-                  height: Sizer.getWidth(context) / 10,
+                Expanded(
+                  child: Image.asset(
+                    "${Font.url}gallery.png",
+                    width: Sizer.getWidth(context) / 10,
+                    height: Sizer.getWidth(context) / 10,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Divider(
-          color: Colors.white,
-          thickness: 2,
-        ),
-        InkWell(
-          onTap: () async {
-            controller.updateValue(await _getImageFromCamera());
-            selecteImage(controller.getImage);
-            Navigator.pop(context);
-          },
-          child: Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  "اختيار الصورة من الكاميرا ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: Sizer.getTextSize(context, 25)),
-                ),
-              ),
-              Expanded(
-                child: Image.asset(
-                  "${Font.url}camera.png",
-                  width: Sizer.getWidth(context) / 10,
-                  height: Sizer.getWidth(context) / 10,
-                ),
-              ),
-            ],
+          Divider(
+            color: Colors.white,
+            thickness: 2,
           ),
-        ),
-      ]),
+          InkWell(
+            onTap: () async {
+              controller.updateValue(await _getImageFromCamera());
+              selecteImage(controller.getImage);
+              Navigator.pop(context);
+            },
+            child: Row(
+              textDirection: TextDirection.rtl,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    "اختيار الصورة من الكاميرا ",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Sizer.getTextSize(context, 25)),
+                  ),
+                ),
+                Expanded(
+                  child: Image.asset(
+                    "${Font.url}camera.png",
+                    width: Sizer.getWidth(context) / 10,
+                    height: Sizer.getWidth(context) / 10,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ]),
+      ),
     );
   }
 
@@ -372,96 +377,104 @@ class Code {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "${Font.url}question.png",
-              fit: BoxFit.cover,
-              width: Sizer.getTextSize(context, 50),
-              height: Sizer.getTextSize(context, 50),
+            SizedBox(
+              height: 20,
             ),
-            Text(
-              "هل تريد تأكيد الحذف ؟",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: Font.fontfamily,
-                  fontSize: Sizer.getTextSize(context, 20),
-                  fontWeight: FontWeight.bold),
+            Expanded(
+              flex: 3,
+              child: Image.asset(
+                "${Font.url}question.png",
+                fit: BoxFit.contain,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Coloring.secondary,
-                        borderRadius: BorderRadius.circular(15)),
-                    alignment: Alignment.center,
-                    width: Sizer.getWidth(context) / 4,
-                    height: Sizer.getHeight(context) / 10,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            "إلغاء",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: Sizer.getTextSize(context, 20),
-                                fontFamily: Font.fontfamily),
+            Expanded(
+              child: Text(
+                "هل تريد تأكيد الحذف ؟",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: Font.fontfamily,
+                    fontSize: Sizer.getTextSize(context, 20),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Coloring.secondary,
+                          borderRadius: BorderRadius.circular(15)),
+                      alignment: Alignment.center,
+                      width: Sizer.getWidth(context) / 4,
+                      height: Sizer.getHeight(context) / 10,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "إلغاء",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizer.getTextSize(context, 20),
+                                  fontFamily: Font.fontfamily),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                            child: Image.asset(
-                          "${Font.url}close.png",
-                          fit: BoxFit.cover,
-                          width: Sizer.getTextSize(context, 25),
-                          height: Sizer.getTextSize(context, 25),
-                        ))
-                      ],
+                          Expanded(
+                              child: Image.asset(
+                            "${Font.url}close.png",
+                            fit: BoxFit.cover,
+                            width: Sizer.getTextSize(context, 25),
+                            height: Sizer.getTextSize(context, 25),
+                          ))
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    acceptInfo.updateValue();
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Coloring.secondary,
-                        borderRadius: BorderRadius.circular(15)),
-                    alignment: Alignment.center,
-                    width: Sizer.getWidth(context) / 4,
-                    height: Sizer.getHeight(context) / 10,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            "تأكيد",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: Sizer.getTextSize(context, 20),
-                                fontFamily: Font.fontfamily),
+                  InkWell(
+                    onTap: () {
+                      acceptInfo.updateValue();
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Coloring.secondary,
+                          borderRadius: BorderRadius.circular(15)),
+                      alignment: Alignment.center,
+                      width: Sizer.getWidth(context) / 4,
+                      height: Sizer.getHeight(context) / 10,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "تأكيد",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Sizer.getTextSize(context, 20),
+                                  fontFamily: Font.fontfamily),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                            child: Image.asset(
-                          "${Font.url}done.png",
-                          fit: BoxFit.cover,
-                          width: Sizer.getTextSize(context, 25),
-                          height: Sizer.getTextSize(context, 25),
-                        ))
-                      ],
+                          Expanded(
+                              child: Image.asset(
+                            "${Font.url}done.png",
+                            fit: BoxFit.cover,
+                            width: Sizer.getTextSize(context, 25),
+                            height: Sizer.getTextSize(context, 25),
+                          ))
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),
@@ -562,6 +575,9 @@ class Code {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return " يجب ملأ هذا الحقل ";
+                      }
+                      if (value.length < 10) {
+                        return " يجب أن يتألّف من 10 أرقام";
                       }
                       return null;
                     },
@@ -695,7 +711,7 @@ class Code {
       BuildContext context,
       TextEditingController controllerRing,
       String hint,
-      bool isName,
+      int state,
       ControllerMyProfile myProfile,
       GlobalKey<FormState> formstate) {
     return AlertDialog(
@@ -718,8 +734,8 @@ class Code {
                 width: Sizer.getWidth(context) / 1.5,
                 child: TextFormField(
                   keyboardType:
-                      isName ? TextInputType.name : TextInputType.number,
-                  maxLength: isName ? 30 : 3,
+                      state == 1 ? TextInputType.name : TextInputType.number,
+                  maxLength: state == 1 ? 30 : 3,
                   textDirection: TextDirection.rtl,
                   controller: controllerRing,
                   cursorColor: Colors.black,
@@ -732,6 +748,7 @@ class Code {
                     if (value!.isEmpty) {
                       return " يجب ملأ هذا الحقل ";
                     }
+
                     return null;
                   },
                   decoration: InputDecoration(
@@ -814,11 +831,12 @@ class Code {
                   child: InkWell(
                     onTap: () {
                       if (formstate.currentState!.validate()) {
-                        if (isName) {
+                        if (state == 1) {
                           myProfile.setterNameRing(controllerRing.text);
-                        } else {
+                        } else if (state == 2) {
                           myProfile.setterNumRing(controllerRing.text);
-                          print("Text is : ${controllerRing.text}");
+                        } else {
+                          myProfile.setterStateRing(controllerRing.text);
                         }
                         Navigator.of(context).pop();
                       }

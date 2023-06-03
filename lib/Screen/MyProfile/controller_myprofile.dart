@@ -5,7 +5,9 @@ class ControllerMyProfile {
   String? name;
   String? nameRing;
   String? numRing;
-  ControllerMyProfile(this.name, this.numberPhone, this.nameRing, this.numRing);
+  String? stateRing;
+  ControllerMyProfile(
+      this.name, this.numberPhone, this.nameRing, this.numRing, this.stateRing);
   StreamController<String> controllerNameRing = StreamController<String>();
   Stream<String> get onValueNameRingChanged => controllerNameRing.stream;
   StreamController<String> controllerNumRing = StreamController<String>();
@@ -14,6 +16,8 @@ class ControllerMyProfile {
   Stream<String> get onValuePhoneChanged => controllerPhone.stream;
   StreamController<String> controllerName = StreamController<String>();
   Stream<String> get onValueNameChanged => controllerName.stream;
+  StreamController<String> controllerStateRing = StreamController<String>();
+  Stream<String> get onValueStateRingChanged => controllerStateRing.stream;
   setterPhone(String newPhone) {
     numberPhone = newPhone;
     controllerPhone.add(numberPhone!);
@@ -32,5 +36,10 @@ class ControllerMyProfile {
   setterNumRing(String newRingNumber) {
     numRing = newRingNumber;
     controllerNumRing.add(numRing!);
+  }
+
+  setterStateRing(String newStateNumber) {
+    stateRing = newStateNumber;
+    controllerStateRing.add(stateRing!);
   }
 }
